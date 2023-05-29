@@ -1,11 +1,36 @@
-FROM alpine:edge
+# syntax=docker/dockerfile:1
 
-RUN apk update \
-    && apk add lighttpd mp3splt \
-    && rm -rf /var/cache/apk/*
 
-ADD htdocs /var/www/localhost/htdocs
-COPY startup.sh .
-HEALTHCHECK --interval=1m --timeout=1s \
-    CMD curl -f http://localhost/ || exit 1
-CMD ["/bin/sh","-c","./startup.sh"]
+FROM ghcr.io/linuxserver/baseimage-ubuntu:jammy
+
+# Add files from binstage
+
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="thelamer"
+
+ARG DEBIAN_FRONTEND="noninteractive"
+
+
+RUN \
+  echo "**** install runtime ****" && \
+    apt-get update && \
+    apt-get install -y \
+    lighttpd \
+    mp3splt && \
+  echo "**** clean up ****" && \
+  rm -rf \
+    /var/lib/apt/lists/* \
+    /var/tmp/*
+
+COPY /root /
+
+ADD html /var/www/html
+
+ENTRYPOINT ["/startup.sh"]
+
+EXPOSE 80
+VOLUME /input_music
+VOLUME /output_music
