@@ -1,11 +1,10 @@
 #! /bin/sh
-exec >logfile.txt 2>&1
 LOG_LOCATION=/var/www/localhost/htdocs/
 exec > >(tee -ia $LOG_LOCATION/MylogFile.log)
 exec 2>&1
 
 echo "Log Location should be: [ $LOG_LOCATION ]"
-
+echo "v0.9.0"
 lighttpd -D -f /etc/lighttpd/lighttpd.conf  &
 
 echo "Lighttpd started"
