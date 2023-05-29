@@ -4,7 +4,7 @@ exec > >(tee -ia $LOG_LOCATION/MylogFile.log)
 exec 2>&1
 
 echo "Log Location should be: [ $LOG_LOCATION ]"
-echo "v0.9.2"
+echo "v0.9.3"
 lighttpd -D -f /etc/lighttpd/lighttpd.conf  &
 
 echo "Lighttpd started"

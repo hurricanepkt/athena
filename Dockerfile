@@ -6,8 +6,6 @@ RUN apk update \
 
 ADD htdocs /var/www/localhost/htdocs
 COPY startup.sh .
-RUN chown startup.sh
-RUN chmod +x startup.sh
 HEALTHCHECK --interval=1m --timeout=1s \
     CMD curl -f http://localhost/ || exit 1
 CMD ["/bin/sh","-c","./startup.sh"]
