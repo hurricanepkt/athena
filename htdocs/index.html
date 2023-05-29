@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <style>
+        textarea {
+            width: 95%;
+            min-height: 600px;
+            border: none;
+            outline: none;
+            border-style: none; 
+            border-color: Transparent; 
+        }
+    </style>
+    <script type="text/javascript">
+    
+        function loadDoc() {
+            fetch('/MylogFile.log').then(function (response) {
+            // The API call was successful!
+                return response.text();
+            }).then(function (html) {
+                // This is the HTML from our response as a text string
+                var textarea = document.querySelector('#logs');
+                textarea.textContent = html;                
+                textarea.scrollTop = textarea.scrollHeight; 
+            }).catch(function (err) {
+                // There was an error
+                console.warn('Something went wrong.', err);
+            });
+        }
+        setInterval(loadDoc, 1000);
+    </script>
+</head>
+
+<body>
+    <h1>Home</h1>
+    <a href="MylogFile.log">MylogFile.log</a>
+    <textarea id="logs" readonly></textarea>
+</body>
+
+</html>
