@@ -1,15 +1,15 @@
 #! /bin/bash
-LOG_LOCATION=/var/www/html/MylogFile.log
-# exec 3>&1 1>>${LOG_LOCATION} 2>&1
-exec >  >(tee -ia $LOG_LOCATION)
-exec 2> >(tee -ia $LOG_LOCATION >&2)
+# LOG_LOCATION=/var/www/html/MylogFile.log
+# # exec 3>&1 1>>${LOG_LOCATION} 2>&1
+# exec >  >(tee -ia $LOG_LOCATION)
+# exec 2> >(tee -ia $LOG_LOCATION >&2)
 
 
-echo "Log Location should be: [ $LOG_LOCATION ]"
+# echo "Log Location should be: [ $LOG_LOCATION ]"
 echo "v0.9.4"
-lighttpd -D -f /etc/lighttpd/lighttpd.conf  &
+# lighttpd -D -f /etc/lighttpd/lighttpd.conf  &
 
-echo "Lighttpd started"
+# echo "Lighttpd started"
 
 
 while true
