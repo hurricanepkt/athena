@@ -2,7 +2,7 @@
 LOG_LOCATION=/var/www/html/MylogFile.log
 [ "$1" = "update" ] || exec "$@" || exit $?
 
-printf "Starting v0.9.9\n"  >> $LOG_LOCATION; 
+printf "Starting v0.9.10\n"  >> $LOG_LOCATION; 
 lighttpd -D -f /etc/lighttpd/lighttpd.conf  &
 
 while [ : ]
@@ -20,5 +20,6 @@ do
         printf "Removing $f\n" >> $LOG_LOCATION;
         rm $f
     done
+    printf "Sleeping for  $SLEEP_DELAY\n" >> $LOG_LOCATION;
     sleep $SLEEP_DELAY
 done
