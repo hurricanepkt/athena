@@ -2,7 +2,7 @@
 LOG_LOCATION=/var/www/html/MylogFile.log
 [ "$1" = "update" ] || exec "$@" || exit $?
 
-
+printf "Starting v0.9.7\n"  > $LOG_LOCATION; 
 lighttpd -D -f /etc/lighttpd/lighttpd.conf  &
 
 while [ : ]
