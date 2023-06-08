@@ -2,7 +2,7 @@
 LOG_LOCATION=/var/www/html/MylogFile.log
 [ "$1" = "update" ] || exec "$@" || exit $?
 
-printf "Starting v0.9.10\n"  >> $LOG_LOCATION; 
+printf "Starting v0.9.12\n"  >> $LOG_LOCATION; 
 lighttpd -D -f /etc/lighttpd/lighttpd.conf  &
 
 while [ : ]
@@ -15,7 +15,7 @@ do
             printf "No files to process\n" >> $LOG_LOCATION;
             break
         fi
-        printf "Splitting\n" > $LOG_LOCATION;
+        printf "Splitting\n" >> $LOG_LOCATION;
         mp3splt -q -s -p th=-50,nt=20 -d /output_music -o @f/@f_@n $f;
         printf "Removing $f\n" >> $LOG_LOCATION;
         rm $f
